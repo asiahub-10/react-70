@@ -1,7 +1,7 @@
 import './Button.css'
-function Button(){
+function Button(props: any){
     return(
-        <button className="button" type="button">Click Me</button>
+        <button className="button" type={props.type}> {props.btn} </button>
     )
 }
 
