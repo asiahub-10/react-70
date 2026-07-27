@@ -2,6 +2,8 @@ import Img1 from "./assets/img/img1.png";
 import { Button } from "./Button";
 import Card from "./Card";
 import Event from "./Event";
+import ABC from "./Effect.tsx";
+
 function App() {
   const name = "Raju";
   const color = {
@@ -13,10 +15,22 @@ function App() {
       <div className="container mb-5">
         <div className="row g-3">
           <div className="col-lg-4 col-sm-6">
-            <Card title="Card 1" btnColor="danger" />
+            <Card title="Card 1" btnColor="danger">
+              <p>
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+              </p>
+            </Card>
           </div>
           <div className="col-lg-4 col-sm-6">
-            <Card title="New Title" btnColor="success" />
+            <Card title="New Title" btnColor="success">
+              <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+              </ul>
+            </Card>
           </div>
           <div className="col-lg-4 col-sm-6">
             <Card title="Another Heading" />

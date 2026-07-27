@@ -5,10 +5,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import App from './App.tsx'
 // import { Button as Btn } from './Button.tsx'
 import Counter from './Count.tsx'
+import Eff from './Effect.tsx'
+import User from './UserManage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* <Counter /> */}
-    <App />
+    {/* <App /> */}
+    {/* <Eff /> */}
+    <User />
   </StrictMode>,
 )
