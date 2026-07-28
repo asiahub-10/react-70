@@ -1,59 +1,48 @@
-import Img1 from "./assets/img/img1.png";
-import { Button } from "./Button";
-import Card from "./Card";
-import Event from "./Event";
-import ABC from "./Effect.tsx";
+import { Link, Outlet } from "react-router";
+import Home from "./Home";
+import UserManage from "./UserManage";
 
 function App() {
-  const name = "Raju";
-  const color = {
-    color: "red",
-    fontSize: "50px",
-  };
   return (
     <>
-      <div className="container mb-5">
-        <div className="row g-3">
-          <div className="col-lg-4 col-sm-6">
-            <Card title="Card 1" btnColor="danger">
-              <p>
-                Some quick example text to build on the card title and make up the
-                bulk of the card's content.
-              </p>
-            </Card>
-          </div>
-          <div className="col-lg-4 col-sm-6">
-            <Card title="New Title" btnColor="success">
-              <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-                <li>Item 4</li>
-              </ul>
-            </Card>
-          </div>
-          <div className="col-lg-4 col-sm-6">
-            <Card title="Another Heading" />
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            Navbar
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/user">
+                  User
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/test">
+                  Test
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div>
-        <img
-          src={Img1}
-          alt="Image"
-          style={{ borderRadius: "20px", width: "200px" }}
-        />
-        <h1>
-          Hello <span style={color}>{name}</span> from React!
-        </h1>
-        <p>New para</p>
-        <Button btn="Login" type="button" />
-        <Button btn="Register" type="submit" />
-        <button className="btn btn-danger">Bootstrap Button</button>
-      </div>
-      <div>
-        {/* <Event /> */}
-      </div>
+      </nav>
+      <Outlet />
     </>
   );
 }
