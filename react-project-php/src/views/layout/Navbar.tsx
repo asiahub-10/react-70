@@ -75,11 +75,11 @@ function Navbar() {
               >
                 <img
                   className="avatar-img avatar-sm"
-                  src="../assets/images/avatar/avatar.jpg"
-                  alt="Admin Hasan"
+                  src="https://i.pravatar.cc/50?img=47"
+                  alt="Asia R."
                 />
                 <span className="profile-name d-none d-sm-inline">
-                  Admin Hasan
+                  Asia R.
                 </span>
               </button>
               <ul className="dropdown-menu dropdown-menu-end">

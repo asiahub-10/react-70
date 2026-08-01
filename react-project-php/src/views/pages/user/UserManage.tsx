@@ -1,19 +1,16 @@
+import { Link } from "react-router";
+import PageHeading from "../../../components/PageHeading.tsx";
+
 function UserManage() {
   return (
     <>
       <main className="dashboard-content">
         <div className="container-fluid px-3 px-lg-4 py-4">
-          <div className="page-heading">
-            <div className="page-heading-copy">
-              <span className="page-icon"><i className="bi bi-people" aria-hidden="true"></i></span>
-              <div>
-                <p className="eyebrow mb-1">Management</p>
-                <h1 className="h3 mb-1">Users</h1>
-                <p className="text-muted mb-0">Review accounts, roles, account status, and team ownership.</p>
-              </div>
-            </div>
-            <div className="heading-actions"><a className="btn btn-outline-secondary btn-sm" href="tables.html"><i className="bi bi-download" aria-hidden="true"></i> Export</a><a className="btn btn-primary btn-sm" href="add-user.html"><i className="bi bi-person-plus" aria-hidden="true"></i> Add User</a></div>
-          </div>
+          <PageHeading icon="people" subtitle="Management" title="Users">
+            <Link to="/user-create" className="btn btn-primary">
+              <i className="bi bi-plus-lg me-1"></i> Add New
+            </Link>
+          </PageHeading>
 
           <section className="row g-3 mt-1" aria-label="User summary">
             <div className="col-12 col-sm-6 col-xl-3">
@@ -74,16 +71,6 @@ function UserManage() {
           </section>
 
           <section className="panel mt-3">
-            <div className="panel-header">
-              <div>
-                <h2 className="h5 mb-1 section-title"><i className="bi bi-table" aria-hidden="true"></i><span>User List</span></h2>
-                <p className="text-muted mb-0">Search, review, and manage team member accounts.</p>
-              </div>
-              <div className="d-flex flex-wrap gap-2">
-                <input className="form-control form-control-sm table-search" type="search" placeholder="Search users" data-table-search="usersTable" aria-label="Search users" />
-                <a className="btn btn-primary btn-sm" href="add-user.html"><i className="bi bi-person-plus" aria-hidden="true"></i> Add User</a>
-              </div>
-            </div>
             <div className="table-responsive">
               <table className="table align-middle mb-0" id="usersTable" data-searchable-table="">
                 <thead><tr><th scope="col">User</th><th scope="col">Role</th><th scope="col">Team</th><th scope="col">Status</th><th scope="col">Joined</th><th scope="col" className="text-end">Action</th></tr></thead>
@@ -91,7 +78,7 @@ function UserManage() {
                   <tr>
                     <td>
                       <div className="d-flex align-items-center gap-2">
-                        <img className="avatar-img avatar-sm" src="../assets/images/avatar/avatar-1.jpg" alt="Sarah Ahmed"/>
+                        <img className="avatar-img avatar-sm" src="https://i.pravatar.cc/50" alt="Sarah Ahmed"/>
                         <div>
                           <p className="fw-semibold mb-0">Sarah Ahmed</p>
                           <p className="text-muted small mb-0">sarah@example.com</p>
@@ -102,12 +89,18 @@ function UserManage() {
                     <td>Operations</td>
                     <td><span className="badge text-bg-success">Active</span></td>
                     <td>Jan 12, 2026</td>
-                    <td className="text-end"><a className="btn btn-light btn-sm" href="user-details.html">View</a></td>
+                    <td>
+                      <div className="d-flex gap-1 justify-content-end">
+                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
+                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>
                       <div className="d-flex align-items-center gap-2">
-                        <img className="avatar-img avatar-sm" src="../assets/images/avatar/avatar-2.jpg" alt="Rafi Khan"/>
+                        <img className="avatar-img avatar-sm" src="https://i.pravatar.cc/50" alt="Rafi Khan"/>
                         <div>
                           <p className="fw-semibold mb-0">Rafi Khan</p>
                           <p className="text-muted small mb-0">rafi@example.com</p>
@@ -118,12 +111,18 @@ function UserManage() {
                     <td>Sales</td>
                     <td><span className="badge text-bg-success">Active</span></td>
                     <td>Feb 03, 2026</td>
-                    <td className="text-end"><a className="btn btn-light btn-sm" href="user-details.html">View</a></td>
+                    <td>
+                      <div className="d-flex gap-1 justify-content-end">
+                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
+                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>
                       <div className="d-flex align-items-center gap-2">
-                        <img className="avatar-img avatar-sm" src="../assets/images/avatar/avatar-3.jpg" alt="Nadia Islam"/>
+                        <img className="avatar-img avatar-sm" src="https://i.pravatar.cc/50" alt="Nadia Islam"/>
                         <div>
                           <p className="fw-semibold mb-0">Nadia Islam</p>
                           <p className="text-muted small mb-0">nadia@example.com</p>
@@ -134,12 +133,18 @@ function UserManage() {
                     <td>Content</td>
                     <td><span className="badge text-bg-warning">Pending</span></td>
                     <td>Mar 18, 2026</td>
-                    <td className="text-end"><a className="btn btn-light btn-sm" href="user-details.html">View</a></td>
+                    <td>
+                      <div className="d-flex gap-1 justify-content-end">
+                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
+                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>
                       <div className="d-flex align-items-center gap-2">
-                        <img className="avatar-img avatar-sm" src="../assets/images/avatar/avatar-4.jpg" alt="Mina Torres"/>
+                        <img className="avatar-img avatar-sm" src="https://i.pravatar.cc/50" alt="Mina Torres"/>
                         <div>
                           <p className="fw-semibold mb-0">Mina Torres</p>
                           <p className="text-muted small mb-0">mina@example.com</p>
@@ -150,12 +155,18 @@ function UserManage() {
                     <td>Finance</td>
                     <td><span className="badge text-bg-secondary">Suspended</span></td>
                     <td>Apr 07, 2026</td>
-                    <td className="text-end"><a className="btn btn-light btn-sm" href="user-details.html">View</a></td>
+                    <td>
+                      <div className="d-flex gap-1 justify-content-end">
+                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
+                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td>
                       <div className="d-flex align-items-center gap-2">
-                        <img className="avatar-img avatar-sm" src="../assets/images/avatar/avatar-5.jpg" alt="Jon Oliver"/>
+                        <img className="avatar-img avatar-sm" src="https://i.pravatar.cc/50" alt="Jon Oliver"/>
                         <div>
                           <p className="fw-semibold mb-0">Jon Oliver</p>
                           <p className="text-muted small mb-0">jon@example.com</p>
@@ -166,7 +177,13 @@ function UserManage() {
                     <td>Data</td>
                     <td><span className="badge text-bg-success">Active</span></td>
                     <td>Apr 22, 2026</td>
-                    <td className="text-end"><a className="btn btn-light btn-sm" href="user-details.html">View</a></td>
+                    <td>
+                      <div className="d-flex gap-1 justify-content-end">
+                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
+                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
