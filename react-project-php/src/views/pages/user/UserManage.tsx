@@ -91,8 +91,8 @@ function UserManage() {
                     <td>Jan 12, 2026</td>
                     <td>
                       <div className="d-flex gap-1 justify-content-end">
-                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
-                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <Link to="/user-details/1" className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></Link>
+                        <Link to="/user-edit/1" className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></Link>
                         <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
                       </div>
                     </td>
@@ -113,8 +113,8 @@ function UserManage() {
                     <td>Feb 03, 2026</td>
                     <td>
                       <div className="d-flex gap-1 justify-content-end">
-                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
-                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <Link to="/user-details/2" className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></Link>
+                        <Link to="/user-edit/2"  className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></Link>
                         <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
                       </div>
                     </td>
@@ -135,8 +135,8 @@ function UserManage() {
                     <td>Mar 18, 2026</td>
                     <td>
                       <div className="d-flex gap-1 justify-content-end">
-                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
-                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <Link to="/user-details/3" className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></Link>
+                        <Link to="/user-edit/3"  className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></Link>
                         <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
                       </div>
                     </td>
@@ -157,8 +157,8 @@ function UserManage() {
                     <td>Apr 07, 2026</td>
                     <td>
                       <div className="d-flex gap-1 justify-content-end">
-                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
-                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <Link to="/user-details/4" className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></Link>
+                        <Link to="/user-edit/4" className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></Link>
                         <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
                       </div>
                     </td>
@@ -179,8 +179,8 @@ function UserManage() {
                     <td>Apr 22, 2026</td>
                     <td>
                       <div className="d-flex gap-1 justify-content-end">
-                        <button className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></button>
-                        <button className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></button>
+                        <Link to="/user-details/5" className="btn btn-sm btn-outline-success"><i className="bi bi-eye"></i></Link>
+                        <Link to="/user-edit/5" className="btn btn-sm btn-outline-primary"><i className="bi bi-pencil-square"></i></Link>
                         <button className="btn btn-sm btn-outline-danger"><i className="bi bi-trash"></i></button>
                       </div>
                     </td>

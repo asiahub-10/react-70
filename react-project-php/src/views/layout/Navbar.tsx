@@ -1,3 +1,4 @@
+import {Link} from "react-router";
 function Navbar() {
   return (
     <>
@@ -97,9 +98,9 @@ function Navbar() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="login.html">
+                  <Link className="dropdown-item" to="/login">
                     Sign out
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
