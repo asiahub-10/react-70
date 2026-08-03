@@ -107,7 +107,7 @@ function Sidebar() {
               <i className="bi bi-person-fill-gear"></i>
             </span>
             <span className="nav-text">Roles</span>
-          </NavLink>          
+          </NavLink>
         </nav>
 
         <div className="sidebar-user">

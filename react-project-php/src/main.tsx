@@ -10,7 +10,7 @@ import './assets/css/custom.css'
 import { routes } from './routes'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <RouterProvider router={routes} />
-  </StrictMode>,
+  // </StrictMode>,
 )
