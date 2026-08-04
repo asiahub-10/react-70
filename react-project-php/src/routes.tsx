@@ -7,6 +7,10 @@ import UserEdit from "./views/pages/user/UserEdit";
 import NotFound from "./views/pages/NotFound";
 import Login from "./views/pages/auth/Login";
 import UserDetails from "./views/pages/user/UserDetails";
+import PostManage from "./views/pages/post/PostManage";
+import PostCreate from "./views/pages/post/PostCreate";
+import PostEdit from "./views/pages/post/PostEdit";
+import PostDetails from "./views/pages/post/PostDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -32,6 +36,22 @@ export const routes = createBrowserRouter([
       {
         path: "/user-details/:id",
         element: <UserDetails />
+      },
+      {
+        path: "/post",
+        element: <PostManage />
+      },
+      {
+        path: "/post-create",
+        element: <PostCreate />
+      },
+      {
+        path: "/post-edit/:id",
+        element: <PostEdit />
+      },
+      {
+        path: "/post-details/:id",
+        element: <PostDetails />
       },
     ]
   },
