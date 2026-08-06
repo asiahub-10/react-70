@@ -3,12 +3,26 @@ import { useEffect, useState } from "react";
 import PageHeading from "../../../components/PageHeading.tsx";
 import { defaultPost } from "../../../interfaces/Post.ts";
 import type { Post } from "../../../interfaces/Post.ts";
+import axios from "axios";
 
 function PostCreate() {
   const [post, setPost] = useState<Post>(defaultPost);
-  function handleSubmit(){
+  const [msg, setMsg] = useState("");
+  function handleSubmit() {
+    // console.log(post);
+    axios
+      .post("https://jsonplaceholder.typicode.com/posts/", post)
+      .then(function (res) {
+        // console.log(res.data)
+        setPost(res.data);
+        setMsg("🎉 Post create successfully!");
+        // location.href = "/post";
+      })
+      .catch(function (err) {
+        console.log(err);
+        setMsg("⚠️ Something went wrong. Post create failed!");
+      });
   }
-
   return (
     <>
       <main className="dashboard-content">
@@ -26,6 +40,11 @@ function PostCreate() {
 
           <section className="row g-3">
             <div className="col-12">
+              {msg != "" && (
+                <div className="alert alert-info" role="alert">
+                  {msg}
+                </div>
+              )}
               <form className="panel needs-validation">
                 <input
                       type="hidden"

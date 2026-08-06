@@ -108,6 +108,13 @@ function Sidebar() {
             </span>
             <span className="nav-text">Roles</span>
           </NavLink>
+          <small className="text-muted d-flex align-items-center">Extra <hr className="w-100 ms-2 my-0"/></small>
+          <NavLink className="nav-link" to="/post">
+            <span className="nav-icon">
+              <i className="bi bi-postcard"></i>
+            </span>
+            <span className="nav-text">Posts</span>
+          </NavLink>
         </nav>
 
         <div className="sidebar-user">

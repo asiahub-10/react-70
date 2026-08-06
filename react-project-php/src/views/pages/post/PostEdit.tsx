@@ -1,16 +1,49 @@
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import PageHeading from "../../../components/PageHeading.tsx";
+import { type Post, defaultPost } from "../../../interfaces/Post";
 
 function PostEdit() {
+  const { id } = useParams();
+  const [post, setPost] = useState<Post>(defaultPost);
+  const [msg, setMsg] = useState("");
+
+  function getData() {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts/" + id)
+      // axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(function (res) {
+        // console.log(res.data);
+        setPost(res.data);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+  useEffect(() => {
+    getData();
+  }, []);
+  function handleSubmit() {
+    // console.log(post);
+    axios
+      .put("https://jsonplaceholder.typicode.com/posts/" + id, post)
+      .then(function (res) {
+        // console.log(res.data)
+        setPost(res.data);
+        setMsg("🎉 Post updated successfully!");
+        // location.href = "/post";
+      })
+      .catch(function (err) {
+        console.log(err);
+        setMsg("⚠️ Something went wrong. Post update failed!");
+      });
+  }
   return (
     <>
       <main className="dashboard-content">
         <div className="container-fluid px-3 px-lg-4 py-4">
-          <PageHeading
-            icon="pencil-square"
-            subtitle="Management"
-            title="Edit Post"
-          >
+          <PageHeading subtitle="Management" title="Edit Post">
             <Link className="btn btn-outline-secondary btn-sm" to="/Post">
               <i className="bi bi-arrow-left" aria-hidden="true"></i> Back to
               List
@@ -19,87 +52,33 @@ function PostEdit() {
 
           <section className="row g-3">
             <div className="col-12">
+              {msg != "" && (
+                <div className="alert alert-info" role="alert">
+                  {msg}
+                </div>
+              )}
               <form className="panel needs-validation">
                 <div className="row g-3">
                   <div className="col-md-6">
-                    <label className="form-label" htmlFor="firstName">
-                      First name
-                    </label>
+                    <label className="form-label">Title</label>
                     <input
                       className="form-control"
-                      id="firstName"
                       type="text"
-                      required
+                      value={post.title}
+                      onChange={(e) =>
+                        setPost({ ...post, title: e.target.value })
+                      }
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="form-label" htmlFor="lastName">
-                      Last name
-                    </label>
-                    <input
-                      className="form-control"
-                      id="lastName"
-                      type="text"
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label" htmlFor="email">
-                      Email
-                    </label>
-                    <input
-                      className="form-control"
-                      id="email"
-                      type="email"
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label" htmlFor="phone">
-                      Phone
-                    </label>
-                    <input
-                      className="form-control"
-                      id="phone"
-                      type="tel"
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label" htmlFor="role">
-                      Role
-                    </label>
-                    <select className="form-select" id="role" required>
-                      <option value="">Choose role</option>
-                      <option>Admin</option>
-                      <option>Manager</option>
-                      <option>Editor</option>
-                      <option>Viewer</option>
-                    </select>
-                    <div className="invalid-feedback">Choose a role.</div>
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label" htmlFor="team">
-                      Team
-                    </label>
-                    <select className="form-select" id="team" required>
-                      <option value="">Choose team</option>
-                      <option>Operations</option>
-                      <option>Sales</option>
-                      <option>Content</option>
-                      <option>Finance</option>
-                    </select>
-                    <div className="invalid-feedback">Choose a team.</div>
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label" htmlFor="notes">
-                      Notes
-                    </label>
+                    <label className="form-label">Body</label>
                     <textarea
                       className="form-control"
-                      id="notes"
-                      rows={4}
-                      placeholder="Optional onboarding notes"
+                      rows={5}
+                      onChange={(e) =>
+                        setPost({ ...post, body: e.target.value })
+                      }
+                      value={post.body}
                     ></textarea>
                   </div>
                 </div>
@@ -107,7 +86,11 @@ function PostEdit() {
                   <button className="btn btn-outline-secondary" type="reset">
                     Cancel
                   </button>
-                  <button className="btn btn-primary" type="submit">
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={handleSubmit}
+                  >
                     Update
                   </button>
                 </div>

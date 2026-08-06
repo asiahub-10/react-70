@@ -1,14 +1,32 @@
 import { Link, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import PageHeading from "../../../components/PageHeading.tsx";
+import {type Post, defaultPost } from "../../../interfaces/Post";
 
 function PostDetails() {
     const {id} = useParams();
+    const [post, setPost] = useState<Post>(defaultPost);
+    
+    function getData() {
+      axios.get("https://jsonplaceholder.typicode.com/posts/"+id)
+      // axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(function(res){
+        // console.log(res.data);
+        setPost(res.data);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }
+    useEffect(() => {
+      getData();
+    }, []);
   return (
     <>
       <main className="dashboard-content">
         <div className="container-fluid px-3 px-lg-4 py-4">
           <PageHeading
-            icon="person-lines-fill"
             subtitle="Management"
             title="Post Details"
           >
@@ -31,68 +49,24 @@ function PostDetails() {
                     src="https://i.pravatar.cc/100"
                     alt="Asia R."
                   />
-                  <h2 className="h5 mb-1">Asia R.</h2>
-                  <p className="text-muted mb-3">Senior Administrator</p>
-                  <span className="badge text-bg-success">Active Account</span>
-                </div>
-                <div className="info-list mt-4 text-start">
-                  <div>
-                    <span>Email</span>
-                    <strong>sarah@example.com</strong>
-                  </div>
-                  <div>
-                    <span>Phone</span>
-                    <strong>+1 555 0184</strong>
-                  </div>
-                  <div>
-                    <span>Team</span>
-                    <strong>Operations</strong>
-                  </div>
-                  <div>
-                    <span>Location</span>
-                    <strong>New York, USA</strong>
-                  </div>
+                  <h2 className="h5 mb-1">{post.userId}</h2>
                 </div>
               </div>
             </div>
             <div className="col-12 col-xl-8">
               <div className="panel mb-3">
-                <div className="panel-header">
-                  <div>
-                    <h2 className="h5 mb-1 section-title">
-                      <i
-                        className="bi bi-person-lines-fill"
-                        aria-hidden="true"
-                      ></i>
-                      <span>Account Overview</span>
-                    </h2>
-                    <p className="text-muted mb-0">
-                      Permissions, plan, and current access details.
-                    </p>
-                  </div>
-                  <Link to={`/Post-edit/${id}`} className="btn btn-primary btn-sm">
+                <div className="panel-header">                  
+                  <Link to={`/Post-edit/${id}`} className="btn btn-primary btn-sm ms-auto">
                     Edit Post
                   </Link>
                 </div>
-                <div className="row g-3">
-                  <div className="col-md-4">
-                    <div className="mini-card">
-                      <span>Role</span>
-                      <strong>Admin</strong>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="mini-card">
-                      <span>Last Login</span>
-                      <strong>Today</strong>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="mini-card">
-                      <span>Projects</span>
-                      <strong>14 Active</strong>
-                    </div>
-                  </div>
+                <h2 className="h5 mb-3 section-title">
+                  <span>{post.title}</span>
+                </h2>
+                <div className="mini-card">
+                    <p className="text-muted mb-0">
+                      {post.body}
+                    </p>
                 </div>
               </div>
               <div className="panel">
