@@ -7,20 +7,54 @@ import {type Post, defaultPost } from "../../../interfaces/Post";
 function PostDetails() {
     const {id} = useParams();
     const [post, setPost] = useState<Post>(defaultPost);
+    const [user, setUser] = useState({
+      name: "",
+      username: "",
+      email: "",
+      phone: "",
+      address: {
+        city: "",
+        zipcode: "",
+      }
+    });
+    const [comments, setComments] = useState([
+      {
+        id: 0,
+        email: "",
+        body: "",
+      }
+    ]);
     
-    function getData() {
+    function getPostData() {
       axios.get("https://jsonplaceholder.typicode.com/posts/"+id)
       // axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
       .then(function(res){
         // console.log(res.data);
-        setPost(res.data);
+        setPost(res.data); 
+        return axios.get("https://jsonplaceholder.typicode.com/users/"+ res.data.userId)
+      })
+      .then(function(res){
+        // console.log(res.data);
+        setUser(res.data);
       })
       .catch(function(err){
         console.log(err);
       });
     }
+    function getAllComments(){
+      axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+      .then(function(res){
+        // console.log(res.data);
+        setComments(res.data);
+      }).
+      catch(function(err){
+        console.log(err);
+      });
+    }
+
     useEffect(() => {
-      getData();
+      getPostData();
+      getAllComments();
     }, []);
   return (
     <>
@@ -49,7 +83,8 @@ function PostDetails() {
                     src="https://i.pravatar.cc/100"
                     alt="Asia R."
                   />
-                  <h2 className="h5 mb-1">{post.userId}</h2>
+                  <h2 className="h5 mb-1">{user.name}</h2>
+                  <p className="badge bg-success mb-0">{user.username}</p>
                 </div>
               </div>
             </div>
@@ -73,38 +108,25 @@ function PostDetails() {
                 <div className="panel-header">
                   <div>
                     <h2 className="h5 mb-1 section-title">
-                      <i className="bi bi-clock-history" aria-hidden="true"></i>
-                      <span>Recent Activity</span>
+                      <i className="bi bi-chat-left"></i>
+                      <span>Comments</span>
                     </h2>
-                    <p className="text-muted mb-0">
-                      Latest security and workflow events.
-                    </p>
                   </div>
                 </div>
                 <div className="activity-list">
-                  <div className="activity-item">
-                    <span className="activity-dot bg-primary"></span>
-                    <div>
-                      <p className="mb-1 fw-semibold">
-                        Updated billing permissions
-                      </p>
-                      <p className="text-muted small mb-0">2 hours ago</p>
+                  {comments.map((item) => (
+                    <div key={item.id} className="activity-item">
+                      <span className="activity-dot bg-primary"></span>
+                      <div>
+                        <p className="mb-1 fw-semibold">
+                          {item.email}
+                        </p>
+                        <p className="text-muted small mb-0">
+                          {item.body}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="activity-item">
-                    <span className="activity-dot bg-success"></span>
-                    <div>
-                      <p className="mb-1 fw-semibold">Approved new teammate</p>
-                      <p className="text-muted small mb-0">Yesterday</p>
-                    </div>
-                  </div>
-                  <div className="activity-item">
-                    <span className="activity-dot bg-warning"></span>
-                    <div>
-                      <p className="mb-1 fw-semibold">Changed password</p>
-                      <p className="text-muted small mb-0">Apr 30, 2026</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

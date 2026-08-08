@@ -27,14 +27,13 @@ function PostManage() {
       .delete("https://jsonplaceholder.typicode.com/posts/" + id)
       .then(function (res) {
         console.log(res);
-        if(res.status == 200) setMsg("🎉 Post deleted successfully!");
+        if (res.status == 200) setMsg("🎉 Post deleted successfully!");
         getAllData();
       })
       .catch(function (err) {
         console.log(err);
         setMsg("⚠️ Something went wrong. Post delete failed!");
       });
-
   }
 
   return (
@@ -49,10 +48,10 @@ function PostManage() {
 
           <section className="panel mt-3">
             {msg != "" && (
-                <div className="alert alert-info" role="alert">
-                  {msg}
-                </div>
-              )}
+              <div className="alert alert-info" role="alert">
+                {msg}
+              </div>
+            )}
             <div className="table-responsive">
               <table
                 className="table align-middle mb-0"
@@ -80,9 +79,7 @@ function PostManage() {
                             src="https://i.pravatar.cc/50"
                             alt="Sarah Ahmed"
                           />
-                          <div>
-                            {item.userId}
-                          </div>
+                          <div>{item.userId}</div>
                         </div>
                       </td>
                       <td>{item.title}</td>
@@ -100,12 +97,16 @@ function PostManage() {
                           >
                             <i className="bi bi-pencil-square"></i>
                           </Link>
-                          <button onClick={()=>handleDelete(item.id)} type="button" className="btn btn-sm btn-outline-danger">
+                          <button
+                            onClick={() => handleDelete(item.id)}
+                            type="button"
+                            className="btn btn-sm btn-outline-danger"
+                          >
                             <i className="bi bi-trash"></i>
                           </button>
                         </div>
                       </td>
-                    </tr>                   
+                    </tr>
                   ))}
                 </tbody>
               </table>

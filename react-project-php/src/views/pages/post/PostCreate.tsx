@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PageHeading from "../../../components/PageHeading.tsx";
 import { defaultPost } from "../../../interfaces/Post.ts";
 import type { Post } from "../../../interfaces/Post.ts";
