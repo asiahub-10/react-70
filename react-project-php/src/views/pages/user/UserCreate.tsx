@@ -1,9 +1,10 @@
 import { Link } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PageHeading from "../../../components/PageHeading.tsx";
 import { defaultUser } from "../../../interfaces/User.ts";
 import type { User } from "../../../interfaces/User.ts";
-import axios from "axios";
+import type { Role } from "../../../interfaces/Role.ts";
+import { api } from "../../../config.tsx";
 
 function UserCreate() {
   const [user, setUser] = useState<User>(defaultUser);
@@ -13,49 +14,78 @@ function UserCreate() {
     password: "",
     role_id: "",
   });
+  const [roles, setRoles] = useState<Role[]>([]);
+
+  const [msg, setMsg] = useState(false);
+  const [success, setSuccess] = useState(false);
   // let name = "Mina";
   // name = "Raju";
   // name = "Mithu";
   // useEffect(() => {
   //   console.log(user);
   // }, [user]);
-  function handleSubmit(){
+  function getRoles(){
+    api.get("roles")
+    .then((res) => {
+      // console.log(res.data);
+      setRoles(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+  useEffect(() => {
+    getRoles();
+  }, []);
+
+  function handleSubmit() {
     let newErrors: any = {};
-    if(user.name == ""){
+    if (user.name == "") {
       newErrors.name = "Name is required";
-    }else if(user.name.length > 100 || user.name.length < 3){
+    } else if (user.name.length > 100 || user.name.length < 3) {
       newErrors.name = "Name must be between 3 and 100 characters";
-    }else{
+    } else {
       newErrors.name = "";
     }
-    if(user.email == ""){
+    if (user.email == "") {
       newErrors.email = "Email is required";
-    }else{
+    } else {
       newErrors.email = "";
     }
-    if(user.role_id == 0){
+    if (user.role_id == 0) {
       newErrors.role_id = "Role is required. Please select one";
-    }else{
+    } else {
       newErrors.role_id = "";
     }
     setErrors(newErrors);
 
-    if(newErrors.name == "" && newErrors.email == "" && newErrors.role_id == ""){
+    if (
+      newErrors.name == "" &&
+      newErrors.email == "" &&
+      newErrors.role_id == ""
+    ) {
       // alert("Submit");
       // console.log(user);
-      axios.post("http://localhost/react-project-api/api/user-create", user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(res=>{
-        console.log(res);
-      })
-      .catch(err=>{
-        console.log(err);
-      });
+      // axios
+      //   .post(baseApiUrl+"user-create", user, {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   })
+      api.post("user-create", user)
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200 || res.status == 201) {
+            setMsg(true);
+            setSuccess(true);
+            setUser(defaultUser);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setMsg(true);
+          setSuccess(false);
+        });
     }
   }
 
@@ -76,6 +106,21 @@ function UserCreate() {
 
           <section className="row g-3">
             <div className="col-12">
+              {msg && (
+                <div
+                  className={`alert alert-${success ? "success" : "danger"} alert-dismissible fade show mb-3`}
+                  role="alert"
+                >
+                  {success ? "Data saved successfully!" : "Something went wrong! Please try again after some time."}
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                    onClick={() => setMsg(false)}
+                  ></button>
+                </div>
+              )}
               <form className="panel needs-validation">
                 <div className="row g-3">
                   <div className="col-md-6">
@@ -87,7 +132,9 @@ function UserCreate() {
                       id="firstName"
                       type="text"
                       value={user.name}
-                      onChange={(e)=>setUser({...user,name:e.target.value})}
+                      onChange={(e) =>
+                        setUser({ ...user, name: e.target.value })
+                      }
                     />
                     <small className="text-danger">{errors.name}</small>
                   </div>
@@ -100,7 +147,9 @@ function UserCreate() {
                       id="email"
                       type="email"
                       value={user.email}
-                      onChange={(e)=>setUser({...user,email:e.target.value})}
+                      onChange={(e) =>
+                        setUser({ ...user, email: e.target.value })
+                      }
                     />
                     <small className="text-danger">{errors.email}</small>
                   </div>
@@ -108,13 +157,20 @@ function UserCreate() {
                     <label className="form-label" htmlFor="role">
                       Role
                     </label>
-                    <select className="form-select" id="role" value={user.role_id} 
-                    onChange={(e)=>setUser({...user,role_id: Number(e.target.value)})}>
-                      <option value={0} disabled>Choose role...</option>
-                      <option value={1}>Admin</option>
-                      <option value={2}>Manager</option>
-                      <option value={3}>Editor</option>
-                      <option value={4}>Viewer</option>
+                    <select
+                      className="form-select"
+                      id="role"
+                      value={user.role_id}
+                      onChange={(e) =>
+                        setUser({ ...user, role_id: Number(e.target.value) })
+                      }
+                    >
+                      <option value={0} disabled>
+                        Choose role...
+                      </option>
+                      {roles.map(item=>(
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                      ))}
                     </select>
                     <small className="text-danger">{errors.role_id}</small>
                   </div>
@@ -127,7 +183,9 @@ function UserCreate() {
                       id="password"
                       type="password"
                       value={user.password}
-                      onChange={(e)=>setUser({...user,password:e.target.value})}
+                      onChange={(e) =>
+                        setUser({ ...user, password: e.target.value })
+                      }
                     />
                     <small className="text-danger">{errors.password}</small>
                   </div>
@@ -136,7 +194,11 @@ function UserCreate() {
                   <button className="btn btn-outline-secondary" type="reset">
                     Cancel
                   </button>
-                  <button className="btn btn-primary" type="button" onClick={handleSubmit}>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={handleSubmit}
+                  >
                     Create New
                   </button>
                 </div>

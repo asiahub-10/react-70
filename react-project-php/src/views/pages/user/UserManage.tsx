@@ -1,15 +1,14 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import PageHeading from "../../../components/PageHeading.tsx";
 import type { User } from "../../../interfaces/User.ts";
+import { api } from "../../../config.tsx";
 
 function UserManage() {
   const [users, setUsers] = useState<User[]>([]);
 
   const getUsers = () => {
-    axios
-      .get("http://localhost/react-project-api/api/users")
+    api.get("users")
       .then((res) => {
         // console.log(res.data);
         setUsers(res.data);
