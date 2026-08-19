@@ -40,7 +40,7 @@ function ProductCreate() {
   }, []);
 
   function handleSubmit() {
-    console.log(product);
+    // console.log(product);
     let data = new FormData();
     data.append("name", product.name);
     data.append("category_id", product.category_id.toString());
@@ -52,6 +52,24 @@ function ProductCreate() {
     data.append("active", product.active.toString());
     if(product.image) data.append("image", product.image);
     
+    // console.log(Object.fromEntries(data.entries()));
+
+    api.post("product-create", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      // console.log(res.data);
+      setProduct(defaultProduct);
+      setMsg(true);
+      setSuccess(true);
+    })
+    .catch((err) => {
+      // console.log(err);
+      setMsg(true);
+      setSuccess(false);
+    });
   }
 
   return (
@@ -63,7 +81,7 @@ function ProductCreate() {
             subtitle="Management"
             title="Add Product"
           >
-            <Link className="btn btn-outline-secondary btn-sm" to="/user">
+            <Link className="btn btn-outline-secondary btn-sm" to="/product">
               <i className="bi bi-arrow-left" aria-hidden="true"></i> Back to
               List
             </Link>
@@ -120,7 +138,7 @@ function ProductCreate() {
                       }
                     >
                       <option value={0} disabled>
-                        Choose role...
+                        Choose category...
                       </option>
                       {categories.map((item) => (
                         <option key={item.id} value={item.id}>
@@ -145,7 +163,7 @@ function ProductCreate() {
                       }
                     >
                       <option value={0} disabled>
-                        Choose role...
+                        Choose brand...
                       </option>
                       {brands.map((item) => (
                         <option key={item.id} value={item.id}>
@@ -252,9 +270,9 @@ function ProductCreate() {
                     </div>
                   </div>
                 </div>
-                <div className="d-flex flex-wrap justify-content-end gap-2 mt-4">
-                  <button className="btn btn-outline-secondary" type="reset">
-                    Cancel
+                <div className="d-flex flex-wrap justify-content-between gap-2 mt-4">
+                  <button className="btn btn-outline-secondary" type="reset" onClick={()=>setProduct(defaultProduct)}>
+                    Reset
                   </button>
                   <button
                     className="btn btn-primary"
