@@ -14,7 +14,7 @@ function ProductManage() {
     api
       .get("products")
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setProducts(res.data);
       })
       .catch((err) => {
