@@ -5,7 +5,7 @@ import { RouterProvider } from "react-router/dom";
 import {pageRoutes as routes} from "./route";
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <RouterProvider router={routes} />
-  </StrictMode>,
+  // </StrictMode>,
 )

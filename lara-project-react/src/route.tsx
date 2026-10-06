@@ -3,6 +3,7 @@ import App from './App.tsx'
 import Home from "./pages/Home.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
+import ManageUser from "./pages/user/ManageUser.tsx";
 
 export const pageRoutes = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const pageRoutes = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/users",
+        element: <ManageUser />,
       },
     ],
   },

@@ -4,14 +4,13 @@ import Navbar from "./layouts/Nav";
 import Footer from "./layouts/Footer";
 import { Outlet } from "react-router";
 
-function App() { 
-
+function App() {
   return (
     <>
       <Navbar />
-      <hr />
-      <Outlet />
-      <hr />
+      <div className="container mx-auto px-4">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );
