@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../../api";
 import type { User } from "../../interfaces/User";
+import { Link } from "react-router";
 
 export default function ManageUser() {
   const [users, setUsers] = useState<User[]>([]);
@@ -23,12 +24,12 @@ export default function ManageUser() {
     <div className="w-fit mx-auto mt-4">
       <div className="flex flex-wrap gap-3 justify-between items-center mb-4">
         <h1 className="font-bold text-2xl text-green-800 mb-4">Users List</h1>
-        <button
+        <Link to="/users/create"
           className="bg-emerald-600 rounded-lg text-gray-50 py-2 px-4 hover:bg-emerald-800 focus:bg-emerald-600 duration-300"
           type="button"
         >
           Create New
-        </button>
+        </Link>
       </div>
 
       <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
