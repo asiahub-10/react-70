@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import type { Role } from "../../interfaces/Role";
 import { api } from "../../api";
 import { defaultUser, errorUser, type User } from "../../interfaces/User";
+import { useNavigate } from "react-router";
 export default function CreateUser() {
   const [roles, setRoles] = useState<Role[]>([]);
   const [user, setUser] = useState<User>(defaultUser);
   const [errUser, setErrUser] = useState(errorUser);
+  const navigate = useNavigate();
 
   const getRole = ()=>{
     api.get('roles')
@@ -29,6 +31,7 @@ export default function CreateUser() {
         alert(res.data.success);  
         setUser(defaultUser);
         setErrUser(errorUser);
+        navigate('/users');
       }
     })
     .catch(function(err){

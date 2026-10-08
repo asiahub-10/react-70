@@ -5,6 +5,10 @@ import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
 import ManageUser from "./pages/user/ManageUser.tsx";
 import CreateUser from "./pages/user/CreateUser.tsx";
+import ShowUser from "./pages/user/ShowUser.tsx";
+import EditUser from "./pages/user/EditUser.tsx";
+import Login from "./pages/auth/Login.tsx";
+import Register from "./pages/auth/Register.tsx";
 
 export const pageRoutes = createBrowserRouter([
   {
@@ -31,6 +35,22 @@ export const pageRoutes = createBrowserRouter([
         path: "/users/create",
         element: <CreateUser />,
       },
+      {
+        path: "/users/:id",
+        element: <ShowUser />,
+      },
+      {
+        path: "/users/:id/edit",
+        element: <EditUser />,
+      },
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  }
 ]);

@@ -10,7 +10,7 @@ export default function ManageUser() {
     api
       .get("users")
       .then(function (res) {
-        console.log(res.data.users.data);
+        // console.log(res.data.users.data);
         setUsers(res.data.users.data);
       })
       .catch(function (err) {
@@ -20,6 +20,21 @@ export default function ManageUser() {
   useEffect(() => {
     getAll();
   }, []);
+  const handleDelete = (id: number, name: string) => {
+    let result = confirm(`Are you sure you want to delete ${name}?`);
+    if(result){
+      api
+        .delete(`users/${id}`)
+        .then(function (res) {
+          // console.log(res.data);
+          getAll();
+          alert(res.data.message);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
+  };
   return (
     <div className="w-fit mx-auto mt-4">
       <div className="flex flex-wrap gap-3 justify-between items-center mb-4">
@@ -64,15 +79,15 @@ export default function ManageUser() {
                 <td className="px-6 py-4">{item.email}</td>
                 <td className="px-6 py-4">
                   <div className="inline-flex rounded-lg shadow-sm">
-                    <button className="rounded-l-lg border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100">
+                    <Link to={`/users/${item.id}`} className="rounded-l-lg border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100">
                       Show
-                    </button>
+                    </Link>
 
-                    <button className="-ml-px border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100">
+                    <Link to={`/users/${item.id}/edit`} className="-ml-px border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100">
                       Edit
-                    </button>
+                    </Link>
 
-                    <button className="-ml-px rounded-r-lg border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100">
+                    <button type="button" onClick={() => handleDelete(item.id,item.name)} className="-ml-px rounded-r-lg border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-100">
                       Delete
                     </button>
                   </div>
