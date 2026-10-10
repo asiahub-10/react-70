@@ -5,4 +5,7 @@ export const baseUrlApi = "http://lara-project-api.test/api/";
 
 export const api = axios.create({
     baseURL: baseUrlApi,
+    headers: {
+        "Content-Type": "application/json",
+    },
 });
