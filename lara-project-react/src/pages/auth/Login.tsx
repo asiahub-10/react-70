@@ -4,19 +4,20 @@ import { defaultUser, errorUser } from "../../interfaces/User";
 import { api } from "../../api";
 
 export default function Login() {
-  const [user, setUser] = useState(defaultUser);
+  const [user, setUser] = useState({email: 'asia@mail.com', password: '123'});
   const [err, setErr] = useState(errorUser);
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
 
   const handleSubmit = () => {
-    console.log(user);
+    // console.log(user);
     api.post("login", user)
     .then(function (res) {
       // console.log(res.data);
       if(res.data.success){
-        setUser(defaultUser);
+        setUser({email: 'asia@mail.com', password: '123'});
         setErr(errorUser);
+        localStorage.setItem('lara_token', res.data.token);
         navigate('/users');
       }
     })
