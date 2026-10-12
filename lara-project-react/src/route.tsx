@@ -9,6 +9,9 @@ import ShowUser from "./pages/user/ShowUser.tsx";
 import EditUser from "./pages/user/EditUser.tsx";
 import Login from "./pages/auth/Login.tsx";
 import Register from "./pages/auth/Register.tsx";
+import { needAuth, notAuth } from "./utils/Auth.ts";
+import AccessDenied from "./pages/error/AccessDenied.tsx";
+import Test from "./pages/Test.tsx";
 
 export const pageRoutes = createBrowserRouter([
   {
@@ -44,13 +47,29 @@ export const pageRoutes = createBrowserRouter([
         element: <EditUser />,
       },
     ],
+    loader: needAuth,
   },
   {
     path: "/login",
     element: <Login />,
+    loader: notAuth,
+
   },
   {
     path: "/register",
     element: <Register />,
+    loader: notAuth,
+  },
+  {
+    path: "/access-denied",
+    element: <AccessDenied />,
+  },
+  {
+    path: "/test",
+    element: <Test />,
+  },
+  {
+    path: "*",
+    element: <h1>404 Not Found</h1>,
   }
 ]);
