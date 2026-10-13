@@ -12,6 +12,7 @@ import Register from "./pages/auth/Register.tsx";
 import { needAuth, notAuth } from "./utils/Auth.ts";
 import AccessDenied from "./pages/error/AccessDenied.tsx";
 import Test from "./pages/Test.tsx";
+import A from "./pages/context-pages/A.tsx";
 
 export const pageRoutes = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const pageRoutes = createBrowserRouter([
       {
         path: "/users/:id/edit",
         element: <EditUser />,
+      },
+      {
+        path: "/context",
+        element: <A />,
       },
     ],
     loader: needAuth,
